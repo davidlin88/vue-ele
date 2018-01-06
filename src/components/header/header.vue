@@ -1,6 +1,5 @@
 <template>
   <div class="header">
-
     <div class="content-wrapper">
       <!-- 店铺头像 -->
       <div class="avatar">
@@ -234,9 +233,7 @@ export default{
     overflow auto
     transition .5s
     backdrop-filter blur(10px)
-    &.fade-enter
-      opacity 0
-    &.fade-leave-to
+    &.fade-enter, &.fade-leave-to
       opacity 0
     .detail-wrapper
       display inline-block
