@@ -220,7 +220,7 @@ export default{
     height 100%
     z-index -1
     img
-      filter:blur(10px)
+      filter blur(10px)
         
   .detail
     position fixed
