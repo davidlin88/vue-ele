@@ -112,7 +112,6 @@ export default {
       this.onlyContent = !this.onlyContent
       this.$nextTick(() => {
         this.scroll.refresh()
-        console.log('内容-刷新')
       })
     },
 
@@ -121,7 +120,6 @@ export default {
       // 刷新列表
       this.$nextTick(() => {
         this.scroll.refresh()
-        console.log('筛选-刷新')
       })
     },
 

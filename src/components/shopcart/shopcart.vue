@@ -141,7 +141,6 @@
         // 从balls中找出isShow为false的ball
         const ball = this.balls.find(ball => !ball.isShow)
         // 只有找到,才做动画
-        console.log(ball)
         if (ball) {
           ball.isShow = true
           ball.startEl = startEl // 保存对应的起始位置的元素??????
@@ -213,6 +212,9 @@
       pay () {
         if (this.totalPrice - this.minPrice >= 0) {
           alert(`支付${this.totalPrice + this.deliveryPrice}元`)
+          this.foodList.forEach(food => {
+            food.count = 0
+          })
         }
       }
     },

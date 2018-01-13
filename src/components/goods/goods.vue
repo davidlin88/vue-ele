@@ -216,8 +216,7 @@ export default{
         background #fff
         font-weight 700
         .text
-          // 这啥
-          border-none()
+          border none
       .icon
         display inline-block
         vertical-align top

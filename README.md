@@ -9,7 +9,7 @@
 * `img`的无src文件时,会有灰色边框,解决方法:换成span标签
 * `filter:blur(10px)`高斯模糊
 * `backdrop-filter blur(10px)`背景高斯模糊
-* `this.$refs.xxx`可用来获取dom节点或子组件和他们的属性:
+* `this.$refs.xxx`可用来获取dom节点或子组件和他们的属性/方法:
 ```
 <menuNav ref="menuNav"></menuNav>
 <div id="app">
@@ -42,6 +42,7 @@ new Vue({
 * `Array.shift()`:删除数组第一个元素,并返回第一个元素的值
 * `this.$refs.food.showOrHide(true)`调用子组件及其方法
 * 父元素的任何`transform`属性会使子元素的`position:fixed`属性失效.解决办法:将需要fixed的元素移出来
+* `event.target`作参数:代指触发事件的dom元素
 
 # stylus用法
 * 省略大括号{},冒号:分号;
@@ -92,15 +93,6 @@ pic-border(niceColor = #fff)
 
 > ***确保obj高度比其父元素高!;`overflow:hidden`***
 
-在`methods`中定义初始化滚动条的方法:
-```
-_initScroll () {
-  new BScroll(this.$refs.menuWrapper, {
-    // 将点击事件开启,betterScroll默认会关闭
-    click: true
-    })
-}
-```
 4. 在函数钩子里调用初始化方法
 
 > 确保所在dom渲染后调用方法($nextTick)
@@ -108,9 +100,35 @@ _initScroll () {
 ```
 created () {
   this.$nextTick(() => {
-    this._initScroll()
+    new BScroll(this.$refs.menuWrapper, {
+      click: true
     })
+  })
 }
 ```
 
 > 横向滚动类似,在Scroll对象定义时增加option:`scrollX: true, eventPassthrough: 'vertical'`
+5. 如果子元素或者父元素 DOM 结构发生改变的时候，必须重新调用 scroll.refresh() 方法重新计算来确保滚动效果的正常:
+```
+this.$nextTick(() => {
+  this.scroll.refresh()
+  })
+```
+
+# 移动端1px边框比实际看起来大的解决方法:
+* 构造伪元素,在相应方向上`transform: scaleY/X(0.5)`:
+```
+border-1px($color)
+  position relative
+  border none
+  &:after
+    position absolute
+    bottom 0
+    left 0
+    content ''
+    width 100%
+    height 1px
+    transform scaleY(0.5)
+    background $color
+
+```
