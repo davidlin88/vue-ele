@@ -16,7 +16,7 @@
           <li class="food-list food-list-hook" v-for="item in goods">
             <h1 class="title">{{item.name}}</h1>
             <ul>
-              <li class="food-item border-1px" v-for="food in item.foods">
+              <li class="food-item border-1px" v-for="food in item.foods" @click="clickFood(food, $event)">
                 <div class="icon">
                   <img :src="food.icon" width="57" height="57">
                 </div>
@@ -45,6 +45,10 @@
         </ul>
       </div>
     </div>
+
+    <food :food="selectFood" :update-food-count="updateFoodCount" ref="food"></food>
+
+    <shopcart :food-list="foodList" :minPrice="seller.minPrice" :delivery-price="seller.deliveryPrice" :update-food-count="updateFoodCount" @clear="clearCart" ref="shopcart"></shopcart>
   </div>
 </template>
 
@@ -53,13 +57,20 @@ import axios from 'axios'
 import BScroll from 'better-scroll'
 import Vue from 'vue'
 import cartcontrol from '../cartcontrol/cartcontrol.vue'
+import shopcart from '../shopcart/shopcart.vue'
+import food from '../food/food.vue'
+
 export default{
+  props: ['seller'],
   components: {
-    cartcontrol
+    cartcontrol,
+    shopcart,
+    food
   },
   data () {
     return {
       goods: [],
+      selectFood: {},
       tops: [],
       scrollY: 0,
       classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee']
@@ -84,13 +95,26 @@ export default{
   },
 
   methods: {
+    clickFood (food, event) {
+      if (!event._constructed) {
+        return
+      }
+      console.log(this.$refs.food)
+      this.selectFood = food
+      this.$refs.food.showOrHide(true)
+    },
+    clearCart () {
+      this.foodList.forEach(food => {
+        food.count = 0
+      })
+    },
     updateFoodCount (food, isAdd, event) {
       // 过滤系统的点击回调
       if (isAdd) {
+        this.$refs.shopcart.drop(event.target)
         if (!food.count) { // 第一次
           Vue.set(food, 'count', 1)
         } else {
-          console.log(food.name)
           food.count++
         }
       } else {
@@ -130,7 +154,7 @@ export default{
     },
     // 右随左变
     clickMenuItem (index, event) {
-      console.log(event._constucted, -this.tops[index])
+      console.log(event._constructed, -this.tops[index])
       // 过滤掉原生DOM事件?
       if (!event._constructed) {
         return
@@ -143,6 +167,18 @@ export default{
   },
 
   computed: {
+    foodList () {
+      // 找出所有count大于0的food
+      const foods = []
+      this.goods.forEach(good => {
+        good.foods.forEach(food => {
+          if (food.count) {
+            foods.push(food)
+          }
+        })
+      })
+      return foods
+    },
     // 左随右变
     currentIndex () {
       return this.tops.findIndex((top, index) => {

@@ -32,6 +32,16 @@ new Vue({
 ```
 * `this.$nextTick`:在下次 DOM 更新循环结束之后执行延迟回调
 * `clientHeight`:不包含边框(padding/border)和滚动条的高度
+* 在vue实例的字符串中调用data的方法(用\`而非引号来包裹字符串):``需付${this.totalPrice}``
+* 根组件到子路由的传参方式:
+```
+<keep-alive>
+  <router-link :seller="seller"></router-link>
+</keep-alive>
+```
+* `Array.shift()`:删除数组第一个元素,并返回第一个元素的值
+* `this.$refs.food.showOrHide(true)`调用子组件及其方法
+* 父元素的任何`transform`属性会使子元素的`position:fixed`属性失效.解决办法:将需要fixed的元素移出来
 
 # stylus用法
 * 省略大括号{},冒号:分号;
@@ -80,7 +90,7 @@ pic-border(niceColor = #fff)
 <div ref="menuWrapper"></div>
 ```
 
-> 确保obj高度比其父元素高;
+> ***确保obj高度比其父元素高!;`overflow:hidden`***
 
 在`methods`中定义初始化滚动条的方法:
 ```
