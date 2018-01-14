@@ -48,6 +48,7 @@ new Vue({
 let data = require('../data.json')
 this.seller = data.seller
 ```
+* 自定义浏览器图标:将图标文件放在static下,在index.html头部加入:`<link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico">`
 
 # stylus用法
 * 省略大括号{},冒号:分号;
