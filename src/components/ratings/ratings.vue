@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import moment from 'moment'
 import BScroll from 'better-scroll'
 import star from '../star/star.vue'
@@ -91,16 +91,18 @@ export default {
     }
   },
   created () {
-    axios.get('/api/ratings').then(res => {
-      const result = res.data
-      if (result.code === 0) {
-        this.ratings = result.data
-        // 创建scroll对象
-      }
-    })
+    // 写死数据
+    let data = require('../../../data.json')
+    this.ratings = data.ratings
+    // axios.get('/api/ratings').then(res => {
+    //   const result = res.data
+    //   if (result.code === 0) {
+    //     this.ratings = result.data
+    //   }
+    // })
+    // 创建scroll对象
     this.$nextTick(() => {
       if (this.$refs.ratings) {
-        console.log('创建scroll对象')
         this.scroll = new BScroll(this.$refs.ratings, {
           click: true
         })

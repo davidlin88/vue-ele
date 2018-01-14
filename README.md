@@ -43,6 +43,11 @@ new Vue({
 * `this.$refs.food.showOrHide(true)`调用子组件及其方法
 * 父元素的任何`transform`属性会使子元素的`position:fixed`属性失效.解决办法:将需要fixed的元素移出来
 * `event.target`作参数:代指触发事件的dom元素
+* 为在pages上预览,写死数据:
+```
+let data = require('../data.json')
+this.seller = data.seller
+```
 
 # stylus用法
 * 省略大括号{},冒号:分号;

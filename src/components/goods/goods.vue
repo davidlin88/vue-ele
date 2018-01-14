@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import BScroll from 'better-scroll'
 import Vue from 'vue'
 import cartcontrol from '../cartcontrol/cartcontrol.vue'
@@ -78,19 +78,17 @@ export default{
   },
 
   created () {
-    axios.get('api/goods').then((res) => {
-      const result = res.data
-      console.log(result)
-      if (result.code === 0) {
-        this.goods = result.data
-        // DOM 更新后执行
-        this.$nextTick(() => {
-          // 初始化滚动条
-          this._initScroll()
-          // 读取右侧所有分类的top值
-          this._initTops()
-        })
-      }
+    // axios.get('api/goods').then((res) => {
+    //   if (res.data.code === 0) {
+    //     this.goods = res.data.data
+    //   }
+    // })
+    // 写死数据
+    let data = require('../../../data.json')
+    this.goods = data.goods
+    this.$nextTick(() => {
+      this._initScroll()
+      this._initTops()
     })
   },
 

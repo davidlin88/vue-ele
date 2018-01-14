@@ -20,7 +20,7 @@
 
 <script>
 import header from './components/header/header.vue'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   data () {
@@ -32,13 +32,16 @@ export default {
     'ele-header': header
   },
   created () {
-    axios.get('api/seller').then((res) => {
-      const result = res.data
-      console.log(result.data)
-      if (result.code === 0) {
-        this.seller = result.data
-      }
-    })
+    // 写死数据
+    let data = require('../data.json')
+    this.seller = data.seller
+    // axios.get('api2/seller').then((res) => {
+    //   const result = res.data
+    //   console.log(result.data)
+    //   if (result.code === 0) {
+    //     this.seller = result.data
+    //   }
+    // })
   }
 }
 </script>
