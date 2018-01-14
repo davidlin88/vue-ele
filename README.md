@@ -1,3 +1,6 @@
+# 项目预览
+[二维码网址](https://davidlin88.github.io/vue-ele/)
+<img src="./static/二维码.svg" width="200px"/>
 # 小鱼干
 * 淡入淡出动画:
 ```
