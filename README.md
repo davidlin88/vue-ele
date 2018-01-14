@@ -43,11 +43,6 @@ new Vue({
 * `this.$refs.food.showOrHide(true)`调用子组件及其方法
 * 父元素的任何`transform`属性会使子元素的`position:fixed`属性失效.解决办法:将需要fixed的元素移出来
 * `event.target`作参数:代指触发事件的dom元素
-* 为在pages上预览,写死数据:
-```
-let data = require('../data.json')
-this.seller = data.seller
-```
 * 自定义浏览器图标:将图标文件放在static下,在index.html头部加入:`<link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico">`
 
 # stylus用法
@@ -138,3 +133,15 @@ border-1px($color)
     background $color
 
 ```
+
+# github pages上预览vue.js项目
+1. 数据不从api接口处获取,而是写死:
+```
+let data = require('../data.json')
+this.seller = data.seller
+```
+2. 建立gh-pages分支
+3. 克隆项目到本地,切换到gh-pages分支
+4. `npm run build`打包项目,删除.git和dist文件夹下内容以外的所有文件
+5. commit
+6. 在github上选择gh-pages分支开启github pages
