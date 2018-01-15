@@ -94,6 +94,24 @@ export default {
       this.scroll = new BScroll(this.$refs.seller, {
         click: true
       })
+      console.log('创建实景的scroll对象')
+      if (this.seller.pics) {
+        let picW = 120
+        let margin = 6
+        let w = (picW + margin) * this.seller.pics.length - margin
+        this.$refs.picList.style.width = w + 'px'
+        this.$nextTick(() => {
+          if (!this.picScroll) {
+            this.picScroll = new BScroll(this.$refs.picWrapper, {
+              scrollX: true,
+              eventPassthrough: 'vertical', // 滚动方向横向
+              click: true
+            })
+          } else {
+            this.pics.refresh()
+          }
+        })
+      }
     })
   },
   methods: {
