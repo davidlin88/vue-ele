@@ -1,5 +1,4 @@
 # 仿饿了么App
----
 ## 前言
 仿饿了么App是基于vue2.x最新实战项目，用到的技术栈
 
@@ -23,4 +22,4 @@
 <img src="./static/二维码.svg" width="200px"/>
 ### 项目总结
 
-[跳转](饿了么app项目总结.md)
+[跳转](https://github.com/davidlin88/vue-ele/饿了么app项目总结.md)
